@@ -1,9 +1,13 @@
 'use strict';
-
+var LoginModule = require('../../common/Login');
+var Renders = require('../../common/Renders');
 var rules = [];
 
 function login(req, res){
-  
+  LoginModule.login('', '', function(err, results){
+    console.error(err);
+  });
+  res.send({id: '123'});
 }
 
 rules.push({
