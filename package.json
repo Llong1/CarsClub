@@ -1,0 +1,14 @@
+{
+    "name": "carsclub-server",
+    "version": "1.0.0",
+    "author": "Llong",
+    "description": "carsclub's web server",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+		"express": "3.4.2",
+		"ejs": "0.8.4",
+        "mysql": "2.0.0-alpha9"
+    }
+}
