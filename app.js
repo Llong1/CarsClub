@@ -1,5 +1,7 @@
 'use strict';
 
+var routers = require('./routes/index');
+
 function initApp(app, port){
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
@@ -9,8 +11,7 @@ function initApp(app, port){
     });
     app.engine('.html', ejs.__express);
     app.use(express.static('public'));
-    // app.use(express.session());
-    // app.use(express.urlencoded());
+    routers.initAction(app).run();
 }
 
 var express = require('express')
@@ -24,6 +25,7 @@ initApp(app, port);
 
 // 对网站首页的访问返回 "Hello World!" 字样
 app.get('/', function (req, res) {
+    console.log(req.hostname);
     res.render('test', { title: 'Hey', message: 'Hello there!'});
 });
 
