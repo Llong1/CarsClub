@@ -3,6 +3,9 @@ var LoginModule = require('../../common/Login');
 var Renders = require('../../common/Renders');
 var rules = [];
 
+/*
+ * 登录接口
+ */
 function login(req, res){
   LoginModule.login('', '', function(err, results){
     console.error(err);
