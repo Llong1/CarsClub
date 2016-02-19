@@ -23,12 +23,6 @@ var port = config._DEBUG ? 8888 : 18080;
 
 initApp(app, port);
 
-// 对网站首页的访问返回 "Hello World!" 字样
-app.get('/', function (req, res) {
-    console.log(req.hostname);
-    res.render('test', { title: 'Hey', message: 'Hello there!'});
-});
-
 var server = app.listen(port, function () {
    var host = server.address().address;
    var port = server.address().port;

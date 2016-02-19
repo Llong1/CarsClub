@@ -8,9 +8,9 @@ var rules = [];
  */
 function login(req, res){
   LoginModule.login('', '', function(err, results){
-    console.error(err);
+    console.error(results);
+    res.send(results);
   });
-  res.send({id: '123'});
 }
 
 rules.push({
