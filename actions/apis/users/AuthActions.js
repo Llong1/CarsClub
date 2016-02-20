@@ -1,22 +1,48 @@
 'use strict';
 var LoginModule = require('../../common/Login');
+var UsersModule = require('../../common/Users');
 var Renders = require('../../common/Renders');
+var Errors = require('../../common/Errors');
 var rules = [];
 
 /*
  * 登录接口
  */
 function login(req, res){
-  LoginModule.login('', '', function(err, results){
-    console.error(results);
-    res.send(results);
+  LoginModule.login('', '', function(err, code, results){
+    if (code == Errors.success.code) {
+      // 成功
+      res.send(results);
+    } else {
+      res.send({'code': code, 'msg': results});
+    }
+  });
+}
+
+/*
+ * 注册接口
+ */
+function createUser(req, res){
+  UsersModule.createUser({}, function(err, code, results){
+    if (code == Errors.success.code) {
+      // 成功
+      res.send(results);
+    } else {
+      res.send({'code': code, 'msg': results});
+    }
   });
 }
 
 rules.push({
-  pattern: '/api/login',
+  pattern: '/api/auth/login',
   method: 'get',
   action: login
+});
+
+rules.push({
+  pattern: '/api/auth/addUser',
+  method: 'get',
+  action: createUser
 });
 
 exports.getRules = function() {

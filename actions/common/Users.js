@@ -4,7 +4,7 @@ var DbRobot = require('../../db/dbRobot');
 var Sqls = require('./Sqls');
 var Errors = require('./Errors');
 
-exports.login = function(user_name, password, callback){
+exports.createUser = function(userMap, callback){
   var pool = DbRobot.getPool();
   pool.getConnection(function(err, conn){
     console.log(err);
@@ -13,14 +13,9 @@ exports.login = function(user_name, password, callback){
       return;
     }
     if (conn) {
-      conn.query(Sqls.QuerySqlLogin
-        , [user_name, password]
-        , function(error, results) {
-            conn.release();
-            callback && callback(null, Errors.success.code, results);
-          });
+
     } else {
-      callback && callback('empty connection', Errors.empty_db_conn.code, Errors.empty_db_conn.msg);
+      callback && callback(err, Errors.empty_db_conn.code, Errors.empty_db_conn.msg);
     }
   });
 }

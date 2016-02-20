@@ -16,7 +16,6 @@ function initAction(app) {
                 } else if (_rules[i].method.toLowerCase() == router.method.post) {
                     app.post(_rules[i].pattern, _rules[i].action);
                 } else {
-                    app.all(_rules[i].pattern, _rules[i].action);
                 }
             }
         }
