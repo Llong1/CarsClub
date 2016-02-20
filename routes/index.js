@@ -9,13 +9,19 @@ function initAction(app) {
         run: function () {
             var _rules = actionManager.getRules();
             for (var i = 0; i < _rules.length; i++) {
-                console.log("监听方法：" + _rules[i].method);
-                console.log("监听路径：" + _rules[i].pattern);
-                if (_rules[i].method.toLowerCase() == router.method.get) {
-                    app.get(_rules[i].pattern, _rules[i].action);
-                } else if (_rules[i].method.toLowerCase() == router.method.post) {
-                    app.post(_rules[i].pattern, _rules[i].action);
+                if (_rules[i].pattern == undefined || _rules[i].pattern == null) {
+                  continue;
+                }
+                if (_rules[i].method) {
+                  if (_rules[i].method.toLowerCase() == router.method.get) {
+                      app.get(_rules[i].pattern, _rules[i].action);
+                  } else if (_rules[i].method.toLowerCase() == router.method.post) {
+                      app.post(_rules[i].pattern, _rules[i].action);
+                  } else {
+                      app.all(_rules[i].pattern, _rules[i].action);
+                  }
                 } else {
+                  app.all(_rules[i].pattern, _rules[i].action);
                 }
             }
         }

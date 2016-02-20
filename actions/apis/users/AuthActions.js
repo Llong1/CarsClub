@@ -9,7 +9,12 @@ var rules = [];
  * 登录接口
  */
 function login(req, res){
-  LoginModule.login('', '', function(err, code, results){
+  var un = req.params.user_name, pw = req.params.password;
+  if (un == undefined || un == null) {
+    res.send({'code': Errors.empty_user_name.code, 'msg': Errors.empty_user_name.msg});
+    return;
+  }
+  LoginModule.login(un, pw, function(err, code, results){
     if (code == Errors.success.code) {
       // 成功
       res.send(results);
@@ -23,7 +28,7 @@ function login(req, res){
  * 注册接口
  */
 function createUser(req, res){
-  UsersModule.createUser({}, function(err, code, results){
+  UsersModule.createUser(req.params, function(err, code, results){
     if (code == Errors.success.code) {
       // 成功
       res.send(results);
