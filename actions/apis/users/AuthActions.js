@@ -1,5 +1,7 @@
 'use strict';
+
 var LoginModule = require('../../common/Login');
+
 var UsersModule = require('../../common/Users');
 var Renders = require('../../common/Renders');
 var Errors = require('../../common/Errors');
@@ -28,7 +30,8 @@ function login(req, res){
  * 注册接口
  */
 function createUser(req, res){
-  UsersModule.createUser(req.params, function(err, code, results){
+  console.log(req.query);
+  UsersModule.createUser(req.query, function(err, code, results){
     if (code == Errors.success.code) {
       // 成功
       res.send(results);

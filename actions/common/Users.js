@@ -3,6 +3,7 @@
 var DbRobot = require('../../db/dbRobot');
 var Sqls = require('./Sqls');
 var Errors = require('./Errors');
+var Strings = require('./Strings');
 
 exports.createUser = function(userMap, callback){
   var pool = DbRobot.getPool();
@@ -13,7 +14,9 @@ exports.createUser = function(userMap, callback){
       return;
     }
     if (conn) {
-
+      var params = [Strings.randomString(20), userMap.user_name];
+      console.log(params);
+      callback && callback(null, Errors.success.code, []);
     } else {
       callback && callback(err, Errors.empty_db_conn.code, Errors.empty_db_conn.msg);
     }
