@@ -9,7 +9,7 @@ var rules = [];
  * 登录接口
  */
 function login(req, res){
-  var un = req.params.user_name, pw = req.params.password;
+  var un = req.query.user_name, pw = req.query.password;
   if (un == undefined || un == null) {
     res.send({'code': Errors.empty_user_name.code, 'msg': Errors.empty_user_name.msg});
     return;
